@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { animate } from "animejs";
+import { useMission } from "./context/MissionContext";
 
 import {
   getMissions,
@@ -13,7 +14,8 @@ import MissionForm from "./components/MissionForm";
 import MissionSearch from "./components/MissionSearch";
 
 function App() {
-  const [missions, setMissions] = useState([]);
+  const { state, dispatch } = useMission();
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
@@ -23,7 +25,12 @@ function App() {
     try {
       setLoading(true);
       const data = await getMissions(search);
-      setMissions(data.data || data);
+
+      dispatch({
+        type: "SET_MISSIONS",
+        payload: data.data || data
+      });
+
     } catch (err) {
       setError(err.message);
     } finally {
@@ -45,19 +52,32 @@ function App() {
   }, []);
 
   const handleCreate = async (formData) => {
-    await createMission(formData);
-    loadMissions();
+    const res = await createMission(formData);
+
+    dispatch({
+      type: "ADD_MISSION",
+      payload: res.data
+    });
   };
 
   const handleUpdate = async (id, formData) => {
-    await updateMission(id, formData);
+    const res = await updateMission(id, formData);
+
+    dispatch({
+      type: "UPDATE_MISSION",
+      payload: res
+    });
+
     setEditingMission(null);
-    loadMissions();
   };
 
   const handleDelete = async (id) => {
     await deleteMission(id);
-    loadMissions();
+
+    dispatch({
+      type: "DELETE_MISSION",
+      payload: id
+    });
   };
 
   return (
@@ -81,7 +101,7 @@ function App() {
       {error && <p style={styles.error}>{error}</p>}
 
       <MissionList
-        missions={missions}
+        missions={state.missions}
         onDelete={handleDelete}
         onEdit={setEditingMission}
       />
