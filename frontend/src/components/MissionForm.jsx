@@ -12,31 +12,35 @@ function MissionForm({ onCreate, onUpdate, editingMission }) {
 
     const formRef = useRef(null);
 
-    // ✨ Animación al aparecer
     useEffect(() => {
         animate(formRef.current, {
-        opacity: [0, 1],
-        translateY: [30, 0],
-        duration: 700
+            opacity: [0, 1],
+            translateY: [30, 0],
+            duration: 700
         });
     }, []);
 
-    // 🔄 Animación al editar
     useEffect(() => {
         if (editingMission) {
-        setForm(editingMission);
+            setForm({
+                nombre: editingMission.nombre || "",
+                destino: editingMission.destino || "",
+                comandante: editingMission.comandante || "",
+                tripulantes: editingMission.tripulantes || 1,
+                estado: editingMission.estado || "Programada"
+            });
 
-        animate(formRef.current, {
-            scale: [0.95, 1],
-            duration: 400
-        });
+            animate(formRef.current, {
+                scale: [0.95, 1],
+                duration: 400
+            });
         }
     }, [editingMission]);
 
     const handleChange = (e) => {
         setForm({
-        ...form,
-        [e.target.name]: e.target.value
+            ...form,
+            [e.target.name]: e.target.value
         });
     };
 
@@ -44,69 +48,69 @@ function MissionForm({ onCreate, onUpdate, editingMission }) {
         e.preventDefault();
 
         if (editingMission) {
-        onUpdate(editingMission.id, form);
+            onUpdate(editingMission.id, form);
         } else {
-        onCreate(form);
+            onCreate(form);
         }
 
         setForm({
-        nombre: "",
-        destino: "",
-        comandante: "",
-        tripulantes: 1,
-        estado: "Programada"
+            nombre: "",
+            destino: "",
+            comandante: "",
+            tripulantes: 1,
+            estado: "Programada"
         });
     };
 
     return (
         <form ref={formRef} onSubmit={handleSubmit} style={styles.form}>
-        <h2 style={styles.title}>
-            {editingMission ? "✏️ Editar Misión" : "🚀 Nueva Misión"}
-        </h2>
+            <h2 style={styles.title}>
+                {editingMission ? "✏️ Editar Misión" : "🚀 Nueva Misión"}
+            </h2>
 
-        <input
-            name="nombre"
-            value={form.nombre}
-            onChange={handleChange}
-            placeholder="Nombre"
-            style={styles.input}
-        />
+            <input
+                name="nombre"
+                value={form.nombre}
+                onChange={handleChange}
+                placeholder="Nombre"
+                style={styles.input}
+            />
 
-        <input
-            name="destino"
-            value={form.destino}
-            onChange={handleChange}
-            placeholder="Destino"
-            style={styles.input}
-        />
+            <input
+                name="destino"
+                value={form.destino}
+                onChange={handleChange}
+                placeholder="Destino"
+                style={styles.input}
+            />
 
-        <input
-            name="comandante"
-            value={form.comandante}
-            onChange={handleChange}
-            placeholder="Comandante"
-            style={styles.input}
-        />
+            <input
+                name="comandante"
+                value={form.comandante}
+                onChange={handleChange}
+                placeholder="Comandante"
+                style={styles.input}
+            />
 
-        <input
-            name="tripulantes"
-            type="number"
-            value={form.tripulantes}
-            onChange={handleChange}
-            style={styles.input}
-        />
+            <input
+                name="tripulantes"
+                type="number"
+                value={form.tripulantes}
+                onChange={handleChange}
+                style={styles.input}
+            />
 
-        <input
-            name="estado"
-            value={form.estado}
-            onChange={handleChange}
-            placeholder="Estado"
-            style={styles.input}
-        />
+            <input
+                name="estado"
+                value={form.estado}
+                onChange={handleChange}
+                placeholder="Estado"
+                style={styles.input}
+            />
 
-        <button type="submit" style={styles.button}>
-            {editingMission ? "Actualizar" : "Crear"}
-        </button>
+            <button type="submit" style={styles.button}>
+                {editingMission ? "Actualizar" : "Crear"}
+            </button>
         </form>
     );
 }
