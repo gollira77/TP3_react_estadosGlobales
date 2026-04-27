@@ -1,90 +1,218 @@
-# Gestor de Misiones Espaciales
+# 🚀 Gestor de Misiones Espaciales
 
-Aplicación fullstack desarrollada con Node.js, Express y React (Vite) que permite gestionar misiones espaciales mediante operaciones CRUD.
+Aplicación fullstack desarrollada para la materia **Taller de Lenguajes de Programación III**.
 
----
-
-## Demo ejemplo
-
-Frontend: https://TU-FRONTEND.vercel.app  
-Backend: https://TU-BACKEND.onrender.com  
+Este proyecto permite gestionar misiones espaciales mediante operaciones CRUD completas, implementando **Backend con Node.js + Express** y **Frontend con React**, incorporando además **estado global con Context API y useReducer**.
 
 ---
 
-## Tecnologías
+## 📌 Objetivo
 
+El objetivo del proyecto es desarrollar una aplicación que permita:
+
+- Crear misiones
+- Listar misiones
+- Buscar misiones
+- Editar misiones
+- Eliminar misiones
+
+Además, se implementa manejo de **estado global** utilizando:
+
+- `createContext`
+- `Provider`
+- `useContext`
+- `useReducer`
+
+---
+
+## 🧠 Tecnologías utilizadas
+
+### Backend
 - Node.js
 - Express
+- CORS
+- Nodemon
+
+### Frontend
 - React
 - Vite
-- anime.js
+- Anime.js
+- Context API
+- useReducer
+- useState
+- useEffect
+- useRef
+
+### Control de versiones
+- Git
+- GitHub
 
 ---
 
-## Instalación local
+## 📁 Estructura del proyecto
+
+```text
+gestor-misiones-espaciales/
+│
+├── backend/
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── data/
+│   │   ├── routes/
+│   │   ├── utils/
+│   │   └── app.js
+│   └── server.js
+│
+├── frontend/
+│   ├── src/
+│   │   ├── api/
+│   │   ├── components/
+│   │   ├── context/
+│   │   │   ├── MissionContext.jsx
+│   │   │   └── missionReducer.js
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│
+└── README.md
+```
+
+---
+
+## ⚙️ Instalación y ejecución
+
+---
 
 ### 1. Clonar repositorio
 
 ```bash
-git clone https://github.com/TU-USUARIO/gestor-misiones-espaciales.git
-cd gestor-misiones-espaciales
+git clone URL_DEL_REPOSITORIO
 ```
 
-Backend
+---
 
-```
+### 2. Backend
+
+```bash
 cd backend
 npm install
 npm run dev
 ```
 
-Servidor en:
-http://localhost:3000
+Servidor:
 
-Frontend
+```text
+http://localhost:3001
 ```
+
+---
+
+### 3. Frontend
+
+```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-App en:
+Aplicación:
+
+```text
 http://localhost:5173
+```
 
-# Funcionalidades
+---
 
-🔵Crear misiones
+## 🌐 API REST
 
-🔵Listar misiones
+### Obtener todas las misiones
 
-🔵Editar misiones
+```http
+GET /api/missions
+```
 
-🔵Eliminar misiones
+---
 
-🔵Buscar por nombre o destino
+### Obtener misión por ID
 
-🔵Animaciones con anime.js
+```http
+GET /api/missions/:id
+```
 
-🔵UI temática espacial
+---
 
-# Conceptos aplicados
+### Crear misión
 
-🟢API REST
+```http
+POST /api/missions
+```
 
-🟢Arquitectura cliente-servidor
+---
 
-🟢Hooks (useState, useEffect)
+### Actualizar misión
 
-🟢Manejo de estado
+```http
+PUT /api/missions/:id
+```
 
-🟢Fetch API
+---
 
-🟢Modularización
+### Eliminar misión
 
-🟢UX/UI con animaciones
+```http
+DELETE /api/missions/:id
+```
 
-# Deploy
+---
 
-Backend en Render
+## 🧠 Estado global
 
-Frontend en Vercel
+La aplicación implementa **Context API + useReducer** para centralizar la información principal del sistema.
+
+### Estado inicial
+
+```js
+{
+  missions: []
+}
+```
+
+---
+
+### Acciones implementadas
+
+- `SET_MISSIONS`
+- `ADD_MISSION`
+- `UPDATE_MISSION`
+- `DELETE_MISSION`
+
+---
+
+## 🎨 Características visuales
+
+- Fondo espacial animado
+- Diseño futurista
+- Efectos visuales con Anime.js
+- Transiciones suaves
+- Animación de formularios
+- Animación de edición
+
+---
+
+## 🧪 Funcionalidades
+
+- Crear misión
+- Buscar por nombre o destino
+- Editar misión
+- Eliminar misión
+- Estado global
+- Persistencia temporal en memoria
+- Validaciones backend
+- Manejo de errores
+
+---
+
+
+## 📚 Materia
+
+**Taller de Lenguajes de Programación III**  
+React / Node.js / Estado Global
